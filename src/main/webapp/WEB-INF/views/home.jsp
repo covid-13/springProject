@@ -6,10 +6,18 @@
 	<title>Home</title>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
-
-<P>  The time on the server is ${serverTime}. </P>
+	<c:import url="common/menubar.jsp"/>
+	
+	<script>
+		$(function(){
+			var msg = "<%= request.getAttribute("msg") %>";
+			if(msg != "null"){
+				alert(msg);
+			}
+		});
+	</script>
+	
+	
+	
 </body>
 </html>
