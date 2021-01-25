@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link ref="shortcut icon" type="image/x-icon" href="resources/images/sitelogo.png"/>
 <style>
 	*{
 		box-sizing:board-box;
