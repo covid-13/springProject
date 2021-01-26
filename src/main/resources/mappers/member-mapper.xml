@@ -50,7 +50,12 @@
       	       )
 	</insert>
 	
-	
+	<update id="deleteMember" parameterType="string">
+		UPDATE
+		       MEMBER
+		   SET M_STATUS='N'
+		 WHERE ID=#{id}
+	</update>
 	
 	
 	

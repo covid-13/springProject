@@ -306,11 +306,25 @@ public class MemberController {
 		}
 	}
 	
+	@RequestMapping("myInfo.do")
+	public String myInfoView() {
+		return "member/myPage"; // myPage.jsp로 이동한다.
+	}
 	
-	
-	
-	
-	
+	@RequestMapping("mdelete.do")
+	public String memberDelete(SessionStatus status
+			                  ,@RequestParam("id") String id
+			                  ,Model model) {
+		
+		int result = mService.deleteMember(id);
+		
+		if(result > 0) {
+			return "redirect:logout.do";
+		}else {
+			model.addAttribute("msg", "회원 탈퇴 실패!");
+			return "common/errorPage";
+		}
+	}
 	
 }
 
