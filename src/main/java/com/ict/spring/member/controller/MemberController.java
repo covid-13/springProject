@@ -220,6 +220,8 @@ public class MemberController {
 		return "redirect:home.do";
 	}
 	
+	// -------------------------------- 회원 가입 -------------------------------//
+	
 }
 
 
