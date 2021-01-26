@@ -17,12 +17,19 @@
 	</resultMap>
 	
 	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
-		SELECT
+		<!-- 암호화 전 -->
+		<!-- SELECT
 		       *
 		  FROM MEMBER
 		 WHERE ID = #{ id }
 		   AND PWD = #{pwd}
-		   AND M_STATUS='Y'
+		   AND M_STATUS='Y' -->
+		<!-- 암호화 후 -->
+		SELECT
+			   *
+	      FROM MEMBER
+	     WHERE ID=#{ id }
+	       AND M_STATUS= 'Y'
 	</select>
 
 	<insert id="insertMember" parameterType="Member">

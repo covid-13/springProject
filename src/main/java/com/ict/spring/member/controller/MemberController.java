@@ -202,20 +202,20 @@ public class MemberController {
 	 * 3. session에 저장할 때 @SessionAttributes 
 	 *    Model에 Attribute가 추가될 때 자동으로 키값을 찾아서 세션에 등록하는 기능을 제공하는 어노테이션 
 	 */
-	@RequestMapping(value="login.do",method=RequestMethod.POST)
-	public String memberLogin(@ModelAttribute Member m, Model model) {
-		
-		Member loginUser = mService.loginMember(m);
-		
-		if(loginUser != null) {
-			model.addAttribute("loginUser", loginUser);
-			/* model.addAttribute("loginAdmin", loginUser); */
-			return "redirect:home.do";
-		}else {
-			model.addAttribute("msg", "로그인 실패");
-			return "common/errorPage";
-		}
-	}
+//	@RequestMapping(value="login.do",method=RequestMethod.POST)
+//	public String memberLogin(@ModelAttribute Member m, Model model) {
+//		
+//		Member loginUser = mService.loginMember(m);
+//		
+//		if(loginUser != null) {
+//			model.addAttribute("loginUser", loginUser);
+//			/* model.addAttribute("loginAdmin", loginUser); */
+//			return "redirect:home.do";
+//		}else {
+//			model.addAttribute("msg", "로그인 실패");
+//			return "common/errorPage";
+//		}
+//	}
 	
 	@RequestMapping("logout.do")
 	public String logout(SessionStatus status) {
@@ -285,6 +285,33 @@ public class MemberController {
 		}
 		
 	}
+	
+	/**
+	 * 암호화 처리 후에 로그인 부분 수정
+	 * @param m
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="login.do",method=RequestMethod.POST)
+	public String memberLogin(@ModelAttribute Member m, Model model) {
+		
+		Member loginUser = mService.loginMember(m);
+		
+		if(loginUser != null && bcryptPasswordEncoder.matches(m.getPwd(), loginUser.getPwd())) {
+			model.addAttribute("loginUser", loginUser);
+			return "redirect:home.do";
+		}else {
+			model.addAttribute("msg", "로그인 실패");
+			return "common/errorPage";
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
 }
 
 
