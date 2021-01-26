@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,6 +25,12 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService mService;
+	
+	// 암호화 처리(spring-security에 bean등록 후) 후 작성 
+	@Autowired
+	private BCryptPasswordEncoder bcryptPasswordEncoder;
+	
+	
 	/*
 	 * @RequestMapping(value="login.do",method=RequestMethod.POST)
 	 * 
@@ -236,7 +243,7 @@ public class MemberController {
 		System.out.println("Member 정보 : " + m);
 		System.out.println("Address 정보 : " + post + ", " + address1 + ", " + address2);
 		
-		
+		System.out.println("암호화 처리 후 값 : " + bcryptPasswordEncoder.encode(m.getPwd()));
 		
 		/*
 		 * 비밀번호 -> 평문으로 되어있다. 1234 
@@ -253,7 +260,30 @@ public class MemberController {
 		 *   
 		 *   해결점 : 솔팅(salting) -> 원문에 아주작은랜덤문자열 추가해서 암호화 코드를 발생시킨다.
 		 */
-		return "redirect:home.do";
+		
+		// 기존의 평문을 암호문으로 바꾸서 m객체에 다시 담자.
+		String encPwd = bcryptPasswordEncoder.encode(m.getPwd());
+		
+		// setter를 통해서 Member객체의 pwd를 변경
+		m.setPwd(encPwd);
+		
+		// 주소데이터를 ", "를 구분자로 저장
+		if(!post.equals("")) {
+			m.setAddress(post + ", " + address1 + ", " + address2);
+		}
+		
+		System.out.println("수정된 Member객체 : " + m);
+		
+		// 회원가입 서비스를 호출
+		int result = mService.insertMember(m);
+		
+		if(result > 0) {
+			return "redirect:home.do";
+		}else {
+			model.addAttribute("msg","회원가입실패!");
+			return "common/errorPage";
+		}
+		
 	}
 }
 

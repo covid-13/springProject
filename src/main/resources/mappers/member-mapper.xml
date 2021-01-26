@@ -15,6 +15,7 @@
 		<result property="updateDate" column="UPDATE_DATE"/>
 		<result property="mStatus" column="M_STATUS"/>
 	</resultMap>
+	
 	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
 		SELECT
 		       *
@@ -24,4 +25,33 @@
 		   AND M_STATUS='Y'
 	</select>
 
+	<insert id="insertMember" parameterType="Member">
+		INSERT 
+		  INTO MEMBER
+		VALUES ( 
+				 #{ id }
+		       , #{ pwd }
+		       , #{ name }
+		       , #{ email }
+		       , #{ gender }
+		       , #{ age }
+		       , #{ phone }
+		       , #{ address }
+		       , sysdate
+		       , sysdate
+		       , default		
+      	       )
+	</insert>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>

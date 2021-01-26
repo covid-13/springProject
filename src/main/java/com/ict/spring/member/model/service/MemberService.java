@@ -12,4 +12,11 @@ public interface MemberService {
 	 */
 	Member loginMember(Member m);
 	
+	/**
+	 * 2. 회원 가입 서비스를 위한 메소드
+	 * @param m
+	 * @return
+	 */
+	int insertMember(Member m);
+	
 }
