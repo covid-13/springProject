@@ -57,7 +57,18 @@
 		 WHERE ID=#{id}
 	</update>
 	
-	
+	<update id="updateMember" parameterType="Member">
+		UPDATE 
+		       MEMBER
+		   SET 
+		       EMAIL=#{ email }
+		     , PWD=#{ pwd }
+		     , AGE =#{ age }
+		     , PHONE = #{ phone }
+		     , ADDRESS = #{ address }
+		     , UPDATE_DATE = SYSDATE
+		 WHERE ID = #{ id }  
+	</update>
 	
 	
 	

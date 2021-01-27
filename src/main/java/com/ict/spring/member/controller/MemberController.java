@@ -311,6 +311,34 @@ public class MemberController {
 		return "member/myPage"; // myPage.jsp로 이동한다.
 	}
 	
+	@RequestMapping("mupdate.do")
+	public String memberUpdate(@ModelAttribute Member m,Model model,
+			                   @RequestParam("post") String post,
+			                   @RequestParam("address1") String addr1,
+			                   @RequestParam("address2") String addr2) {
+		System.out.println("Member : " + m);
+		
+		String encPwd = bcryptPasswordEncoder.encode(m.getPwd());
+		
+		// setter를 통해서 Member객체의 pwd를 변경
+		m.setPwd(encPwd);
+		
+		// 주소 데이터를 ","를 구분자로 두고 저장
+		if(!post.equals("")) {
+			m.setAddress(post + ","+addr1 + "," +addr2);
+		}
+		
+		int result = mService.updateMember(m);
+		
+		if(result > 0) {
+			model.addAttribute("loginUser", m);
+			return "redirect:home.do";
+		}else {
+			model.addAttribute("msg","회원 정보 수정 실패!");
+			return "common/errorPage";
+		}
+	}
+	
 	@RequestMapping("mdelete.do")
 	public String memberDelete(SessionStatus status
 			                  ,@RequestParam("id") String id
