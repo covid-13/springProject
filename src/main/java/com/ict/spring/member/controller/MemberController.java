@@ -1,10 +1,9 @@
 package com.ict.spring.member.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
-import javax.servlet.http.HttpServletResponse;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -32,6 +31,8 @@ public class MemberController {
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
+	// 로깅시 추가
+	private Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	/*
 	 * @RequestMapping(value="login.do",method=RequestMethod.POST)
@@ -232,6 +233,10 @@ public class MemberController {
 	// -------------------------------- 회원 가입 -------------------------------//
 	@RequestMapping("enrollView.do")
 	public String enrollView() {
+		
+		if(logger.isDebugEnabled()) // 프로젝트 배포시에 성능저하를 막기위해 logger의 레벨이 DEBUG인지 여부를 확인
+		    logger.debug("회원등록페이지");
+		
 		return "member/memberInsertForm";
 	}
 	
