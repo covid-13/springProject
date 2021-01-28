@@ -81,7 +81,7 @@
 	</appender>
 	
 	<appender name="LoginFile" class="org.apache.log4j.DailyRollingFileAppender">
-		<!-- 로그 파일 위치(C드라이브 하위 절대경로로 지정된다.) -->
+		<!-- 로그 파일 위치 -->
 		<param name="File" value="/logs/member/login.log"/>
 		<param name="Append" value="true"/>
 		

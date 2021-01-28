@@ -304,7 +304,8 @@ public class MemberController {
 		
 		Member loginUser = mService.loginMember(m);
 		
-		if(loginUser != null && bcryptPasswordEncoder.matches(m.getPwd(), loginUser.getPwd())) {
+		if(loginUser != null 
+				&& bcryptPasswordEncoder.matches(m.getPwd(), loginUser.getPwd())) {
 			model.addAttribute("loginUser", loginUser);
 			return "redirect:home.do";
 		}else {
