@@ -14,7 +14,6 @@
 	<packaging>war</packaging> <!-- 패키지 유형을 정의하는 영역 -->
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	
-	
 	<!-- * properties -->
 	<!-- 자바 버전 1.8 / 스프링 버전-->
 	<!-- properties 태그를 이용하여 변수를 선언해서 다른 소스에 참조하도록한다. -->
@@ -204,7 +203,12 @@
 		    <artifactId>spring-security-config</artifactId>
 		    <version>5.2.1.RELEASE</version>
 		</dependency>
-				
+		<dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.12</version>
+            <scope>provided</scope>
+      </dependency>
 	</dependencies>
     <build>
         <plugins>

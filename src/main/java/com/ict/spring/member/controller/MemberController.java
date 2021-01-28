@@ -1,7 +1,9 @@
 package com.ict.spring.member.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.ict.spring.member.model.service.MemberService;
 import com.ict.spring.member.model.vo.Member;
@@ -354,6 +355,26 @@ public class MemberController {
 		}
 	}
 	
+	
+	/**
+	 * 1. 기존의 방식대로 Stream을 이용한 방식
+	 * @param id
+	 * @param response
+	 * @throws IOException 
+	 */
+	@RequestMapping("idCheck.do")
+	public void idCheck(String id, HttpServletResponse response) throws IOException {
+		
+		int result = mService.idCheck(id);
+		
+		PrintWriter out = response.getWriter();
+		
+		if(result > 0) { // 중복 존재
+			out.print("fail");
+		}else {
+			out.print("ok");
+		}
+	}
 }
 
 

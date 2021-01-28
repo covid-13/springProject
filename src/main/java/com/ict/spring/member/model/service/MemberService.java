@@ -32,5 +32,15 @@ public interface MemberService {
 	 * @return
 	 */
 	int deleteMember(String id);
+
+	/**
+	 * 5. 아이디 중복체크를 위한 메소드
+	 * @param id
+	 * @return
+	 */
+	int idCheck(String id);
 	
 }
+
+
+
