@@ -29,6 +29,10 @@
 			<mapping path="/blist.do"/>
 			<beans:bean id="BlistInterceptor" class="com.ict.spring.common.interceptor.BlistInterceptor"/>
 		</interceptor>
+		<interceptor>
+			<mapping path="/login.do"/>
+			<beans:bean id="LoginInterceptor" class="com.ict.spring.common.interceptor.LoginInterceptor"/>
+		</interceptor>
 	</interceptors>
 	
 	

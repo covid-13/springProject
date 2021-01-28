@@ -80,12 +80,39 @@
 		</layout>
 	</appender>
 	
-	
+	<appender name="LoginFile" class="org.apache.log4j.DailyRollingFileAppender">
+		<!-- 로그 파일 위치(C드라이브 하위 절대경로로 지정된다.) -->
+		<param name="File" value="/logs/member/login.log"/>
+		<param name="Append" value="true"/>
+		
+		<!-- 로그 파일 문자 인코딩 설정 -->
+		<param name="encoding" value="UTF-8"/>
+		
+		<!-- 파일명에 입력될 날짜 패턴(백업 파일명에 추가된다.) -->
+		<param name="DatePattern" value="'.'yyy-MM-dd-HH-mm-ss"/>
+		
+		<!-- layout지정 -->
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yy-MM-dd HH:mm:ss} %m%n"/>
+		</layout>
+	</appender>
 	
 	<logger name="com.ict.spring.member.controller.MemberController" additivity="false">
 		<level value="debug"/>
 		<appender-ref ref="myConsole"/>
 	</logger>
+	
+	<!-- interceptor -->
+	<logger name="com.ict.spring.common.interceptor.BlistInterceptor" additivity="false">
+		<level value="debug"/>
+		<appender-ref ref="myConsole"/>
+	</logger>
+	
+	<logger name="com.ict.spring.common.interceptor.LoginInterceptor" additivity="false">
+		<level value="debug"/>
+		<appender-ref ref="LoginFile"/>
+	</logger>
+	
 	
 	<!-- Application Loggers -->
 	<logger name="com.ict.spring">
