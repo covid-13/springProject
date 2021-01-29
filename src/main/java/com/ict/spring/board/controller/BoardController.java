@@ -141,8 +141,8 @@ public class BoardController {
 
 		File folder = new File(savePath); // savePath의 폴더를 불러와서
 
-		if (!folder.exists()) {
-			folder.mkdirs(); // 폴더가 없다면 생성한다.
+		if (!folder.exists()) { // 해당 경로에 폴더가 있는지 여부를 판단하는 메소드
+			folder.mkdirs(); // 폴더가 없다면 새롭게 생성
 		}
 
 		// 게시판같은 경우 많은 회원들이 동시에 올릴수도 있고 겹치는 파일을 올릴수도 잇기 때문에
